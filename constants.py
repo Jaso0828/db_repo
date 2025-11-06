@@ -1,0 +1,1 @@
+DB_PATH = './data_store/baza.db'

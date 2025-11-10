@@ -11,4 +11,4 @@ class Book:
         self.isbn:str = isbn
 
     def __str__(self):
-        return f'{self.title} ({self.author.full_name})'
+        return f'{self.title} ({self.author._full_name()})'

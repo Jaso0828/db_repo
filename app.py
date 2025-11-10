@@ -1,8 +1,9 @@
-from models.authors import Author
-from models.books import Book
-from repository.author_repos import add_author, get_author, get_all_authors, update_author, delete_author
-from repository.db_init import db_init
-from repository.books_repos import add_book, update_book, delete_book, get_book, get_all_books
+# from models.authors import Author
+# from models.books import Book
+# from repositories.author_repos import add_author
+# from repositories.db_init import db_init
+# from repositories.book_repos import add_book
+from repository.class_based_repo import Author, Book, Repo
 
 
 def main():
@@ -18,34 +19,24 @@ def main():
     # price = float(input('Upiste cijenu knjige: '))
     # book = Book(title, author, price, description, isbn)
     # book.id = add_book(book)
-    # new_price = float(input('Upisite novu cijenu: '))
-    # book_id = int(input('Upisite id knjige: '))
-    # rezultat = update_book(new_price, book_id )
-    # print(rezultat)
-    # books = get_all_books()
-    # for book in books:
-    #     print(book)
-    
-    # authors = get_all_authors()
-    # for author in authors:
-    #     print(author)
 
     # author.add_book(book)
-
-    # del_author = delete_author(4)
-    # print(del_author)
-    authors = get_all_authors()
-
-    for author in authors:
-        print(f"Autor: {author.full_name}")
-        if author.books:
-            for book in author.books:
-                print(f"  - {book.title}")
-        else:
-            print("  (nema knjiga)")
-
+    pass
 
 
 if __name__ == '__main__':
-    db_init()
-    main()
+    # db_init()
+    # main()
+
+
+
+    repo = Repo()
+
+    # Create Author and Book
+    author_id = repo.add_author(Author(name="George Orwell"))
+    repo.add_book(Book(title="1984", author_id=author_id))
+    repo.add_book(Book(title="Animal Farm", author_id=author_id))
+
+    # List authors and books
+    print("Authors:", repo.list_authors())
+    print("Books:", repo.list_books(author_id))
